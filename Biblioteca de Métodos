@@ -1,0 +1,417 @@
+public class Utilidades {
+
+    // Métodos para manipulação de strings
+    public static String inverterString(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+
+    public static boolean ePalindromo(String str) {
+        String invertida = inverterString(str);
+        return str.equals(invertida);
+    }
+
+    public static int contarVogais(String str) {
+        int count = 0;
+        String vogais = "aeiouAEIOU";
+        for (char c : str.toCharArray()) {
+            if (vogais.indexOf(c) != -1) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Métodos para cálculos matemáticos
+    public static int fatorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return n * fatorial(n - 1);
+    }
+
+    public static int mdc(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return mdc(b, a % b);
+    }
+
+    public static double media(int[] numeros) {
+        int soma = 0;
+        for (int num : numeros) {
+            soma += num;
+        }
+        return (double) soma / numeros.length;
+    }
+
+    // Métodos para manipulação de listas
+    public static <T> void imprimirLista(List<T> lista) {
+        for (T item : lista) {
+            System.out.println(item);
+        }
+    }
+
+    public static <T> List<T> inverterLista(List<T> lista) {
+        List<T> invertida = new ArrayList<>(lista);
+        Collections.reverse(invertida);
+        return invertida;
+    }
+
+    public static <T> boolean contemDuplicados(List<T> lista) {
+        Set<T> set = new HashSet<>(lista);
+        return set.size() != lista.size();
+    }
+
+    // Métodos para manipulação de arrays
+    public static int[] ordenarArray(int[] array) {
+        int[] arrayOrdenado = array.clone();
+        Arrays.sort(arrayOrdenado);
+        return arrayOrdenado;
+    }
+
+    public static int buscarElemento(int[] array, int elemento) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == elemento) {
+                return i;
+            }
+        }
+        return -1; // Retorna -1 se o elemento não for encontrado
+    }
+
+    public static double calcularDesvioPadrao(int[] array) {
+        double media = media(array);
+        double soma = 0;
+        for (int num : array) {
+            soma += Math.pow(num - media, 2);
+        }
+        return Math.sqrt(soma / array.length);
+    }
+
+    // Métodos diversos
+    public static boolean eNumeroPrimo(int numero) {
+        if (numero <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String gerarSenhaAleatoria(int comprimento) {
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder senha = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < comprimento; i++) {
+            int index = random.nextInt(caracteres.length());
+            senha.append(caracteres.charAt(index));
+        }
+        return senha.toString();
+    }
+
+    public static String formatarData(Date data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(data);
+    }
+
+    // Método principal para testes
+    public static void main(String[] args) {
+        // Teste dos métodos
+        System.out.println("Inverter string: " + inverterString("Hello"));
+        System.out.println("É palíndromo: " + ePalindromo("radar"));
+        System.out.println("Contar vogais: " + contarVogais("Hello World"));
+
+        System.out.println("Fatorial de 5: " + fatorial(5));
+        System.out.println("MDC de 36 e 48: " + mdc(36, 48));
+        System.out.println("Média de {1, 2, 3, 4, 5}: " + media(new int[]{1, 2, 3, 4, 5}));
+
+        List<String> lista = Arrays.asList("A", "B", "C", "A");
+        imprimirLista(lista);
+        System.out.println("Inverter lista: " + inverterLista(lista));
+        System.out.println("Contém duplicados: " + contemDuplicados(lista));
+
+        int[] array = {5, 3, 8, 1, 2};
+        System.out.println("Array ordenado: " + Arrays.toString(ordenarArray(array)));
+        System.out.println("Buscar elemento 3: " + buscarElemento(array, 3));
+        System.out.println("Desvio padrão: " + calcularDesvioPadrao(array));
+
+        System.out.println("É número primo: " + eNumeroPrimo(7));
+        System.out.println("Gerar senha aleatória: " + gerarSenhaAleatoria(10));
+        System.out.println("Formatar data: " + formatarData(new Date()));
+    }
+}
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class UtilidadesComuns {
+
+    // Métodos para manipulação de strings
+    public static String concatenarStrings(String str1, String str2) {
+        return str1 + str2;
+    }
+
+    public static String converterParaMaiusculo(String str) {
+        return str.toUpperCase();
+    }
+
+    public static String converterParaMinusculo(String str) {
+        return str.toLowerCase();
+    }
+
+    // Métodos para operações matemáticas básicas
+    public static int somar(int a, int b) {
+        return a + b;
+    }
+
+    public static int subtrair(int a, int b) {
+        return a - b;
+    }
+
+    public static int multiplicar(int a, int b) {
+        return a * b;
+    }
+
+    public static double dividir(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Divisão por zero não é permitida.");
+        }
+        return (double) a / b;
+    }
+
+    // Métodos para manipulação de datas
+    public static String obterDataAtual() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(new Date());
+    }
+
+    public static String obterHoraAtual() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(new Date());
+    }
+
+    // Método para calcular a idade a partir da data de nascimento
+    public static int calcularIdade(Date dataNascimento) {
+        Calendar hoje = Calendar.getInstance();
+        Calendar nascimento = Calendar.getInstance();
+        nascimento.setTime(dataNascimento);
+        
+        int idade = hoje.get(Calendar.YEAR) - nascimento.get(Calendar.YEAR);
+        if (hoje.get(Calendar.DAY_OF_YEAR) < nascimento.get(Calendar.DAY_OF_YEAR)) {
+            idade--;
+        }
+        return idade;
+    }
+
+    // Método para validar e-mail
+    public static boolean validarEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+    }
+
+    // Métodos diversos
+    public static void imprimirMensagem(String mensagem) {
+        System.out.println(mensagem);
+    }
+
+    public static int gerarNumeroAleatorio(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
+
+    public static boolean eNumeroPar(int numero) {
+        return numero % 2 == 0;
+    }
+
+    public static boolean eNumeroImpar(int numero) {
+        return !eNumeroPar(numero);
+    }
+
+    // Método principal para testes
+    public static void main(String[] args) {
+        // Teste dos métodos
+        System.out.println("Concatenar strings: " + concatenarStrings("Hello", " World"));
+        System.out.println("Converter para maiúsculo: " + converterParaMaiusculo("hello"));
+        System.out.println("Converter para minúsculo: " + converterParaMinusculo("HELLO"));
+
+        System.out.println("Somar 3 + 2: " + somar(3, 2));
+        System.out.println("Subtrair 3 - 2: " + subtrair(3, 2));
+        System.out.println("Multiplicar 3 * 2: " + multiplicar(3, 2));
+        System.out.println("Dividir 6 / 2: " + dividir(6, 2));
+
+        System.out.println("Data atual: " + obterDataAtual());
+        System.out.println("Hora atual: " + obterHoraAtual());
+
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(1990, Calendar.JANUARY, 1);
+        Date dataNascimento = calendario.getTime();
+        System.out.println("Calcular idade: " + calcularIdade(dataNascimento));
+
+        System.out.println("Validar e-mail 'teste@exemplo.com': " + validarEmail("teste@exemplo.com"));
+
+        imprimirMensagem("Esta é uma mensagem de teste.");
+        System.out.println("Gerar número aleatório entre 1 e 10: " + gerarNumeroAleatorio(1, 10));
+        System.out.println("É número par (4): " + eNumeroPar(4));
+        System.out.println("É número ímpar (5): " + eNumeroImpar(5));
+    }
+}
+
+import java.io.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import org.json.JSONObject;
+
+public class UtilidadesProfissionais {
+
+    // Métodos para operações de banco de dados
+    public static Connection conectarBancoDados(String url, String usuario, String senha) throws SQLException {
+        return DriverManager.getConnection(url, usuario, senha);
+    }
+
+    public static void executarConsultaSQL(Connection conn, String sql) throws SQLException {
+        Statement stmt = conn.createStatement();
+        stmt.execute(sql);
+    }
+
+    public static ResultSet executarConsultaSelect(Connection conn, String sql) throws SQLException {
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(sql);
+    }
+
+    // Métodos para manipulação de arquivos
+    public static void escreverEmArquivo(String caminhoArquivo, String conteudo) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo));
+        writer.write(conteudo);
+        writer.close();
+    }
+
+    public static String lerDeArquivo(String caminhoArquivo) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivo));
+        StringBuilder conteudo = new StringBuilder();
+        String linha;
+        while ((linha = reader.readLine()) != null) {
+            conteudo.append(linha).append("\n");
+        }
+        reader.close();
+        return conteudo.toString();
+    }
+
+    // Métodos para validação de dados
+    public static boolean validarCPF(String cpf) {
+        if (cpf == null || cpf.length() != 11 || cpf.matches(cpf.charAt(0) + "{11}")) {
+            return false;
+        }
+        int[] pesos = {10, 9, 8, 7, 6, 5, 4, 3, 2, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += (cpf.charAt(i) - '0') * pesos[i];
+        }
+        int resto = soma % 11;
+        char digito1 = (resto < 2) ? '0' : (char) ('0' + (11 - resto));
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += (cpf.charAt(i) - '0') * pesos[i + 1];
+        }
+        resto = soma % 11;
+        char digito2 = (resto < 2) ? '0' : (char) ('0' + (11 - resto));
+
+        return cpf.charAt(9) == digito1 && cpf.charAt(10) == digito2;
+    }
+
+    public static boolean validarEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+    }
+
+    // Métodos para manipulação de JSON
+    public static String converterObjetoParaJSON(Object obj) {
+        return new JSONObject(obj).toString();
+    }
+
+    public static JSONObject converterJSONParaObjeto(String jsonString) {
+        return new JSONObject(jsonString);
+    }
+
+    // Métodos para envio de e-mail
+    public static void enviarEmail(String destinatario, String assunto, String corpo, String remetente, String senha) throws MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(remetente, senha);
+            }
+        });
+
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(remetente));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+        message.setSubject(assunto);
+        message.setText(corpo);
+
+        Transport.send(message);
+    }
+
+    // Métodos diversos
+    public static void imprimirMensagem(String mensagem) {
+        System.out.println(mensagem);
+    }
+
+    public static int gerarNumeroAleatorio(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
+
+    public static boolean eNumeroPar(int numero) {
+        return numero % 2 == 0;
+    }
+
+    public static boolean eNumeroImpar(int numero) {
+        return !eNumeroPar(numero);
+    }
+
+    // Método principal para testes
+    public static void main(String[] args) {
+        try {
+            // Teste dos métodos de banco de dados
+            Connection conn = conectarBancoDados("jdbc:mysql://localhost:3306/meubanco", "usuario", "senha");
+            executarConsultaSQL(conn, "CREATE TABLE IF NOT EXISTS teste (id INT, nome VARCHAR(100))");
+            ResultSet rs = executarConsultaSelect(conn, "SELECT * FROM teste");
+
+            // Teste dos métodos de manipulação de arquivos
+            escreverEmArquivo("teste.txt", "Olá, mundo!");
+            System.out.println("Conteúdo do arquivo: " + lerDeArquivo("teste.txt"));
+
+            // Teste dos métodos de validação de dados
+            System.out.println("Validar CPF '12345678909': " + validarCPF("12345678909"));
+            System.out.println("Validar e-mail 'teste@exemplo.com': " + validarEmail("teste@exemplo.com"));
+
+            // Teste dos métodos de manipulação de JSON
+            String jsonString = converterObjetoParaJSON(new HashMap<String, String>() {{
+                put("chave", "valor");
+            }});
+            System.out.println("Objeto convertido para JSON: " + jsonString);
+            JSONObject jsonObject = converterJSONParaObjeto(jsonString);
+            System.out.println("JSON convertido para objeto: " + jsonObject);
+
+            // Teste do método de envio de e-mail
+            enviarEmail("destinatario@exemplo.com", "Assunto de Teste", "Corpo do e-mail", "seuemail@gmail.com", "suasenha");
+
+            // Teste dos métodos diversos
+            imprimirMensagem("Esta é uma mensagem de teste.");
+            System.out.println("Gerar número aleatório entre 1 e 10: " + gerarNumeroAleatorio(1, 10));
+            System.out.println("É número par (4): " + eNumeroPar(4));
+            System.out.println("É número ímpar (5): " + eNumeroImpar(5));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
